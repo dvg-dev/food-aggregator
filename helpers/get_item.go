@@ -104,7 +104,6 @@ func GetItems() ([]model.Item, error) {
 		genItem = model.Item(item)
 		items = append(items, genItem)
 	}
-	log.Println(items)
 	return items, nil
 }
 
