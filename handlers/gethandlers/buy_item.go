@@ -3,6 +3,7 @@ package gethandlers
 import (
 	"encoding/json"
 	"log"
+	"strings"
 
 	"github.com/dvg-dev/food-aggregator/helpers"
 	"github.com/dvg-dev/food-aggregator/model"
@@ -34,7 +35,7 @@ func (g *GetHandler) BuyByNameHandler(ctx echo.Context) error {
 //findItembyName to find the item from the list of items fetched from the URLs
 func findItembyName(items []model.Item, itemName string) model.Item {
 	for _, item := range items {
-		if itemName == item.Name {
+		if strings.EqualFold(itemName, item.Name) {
 			return item
 		}
 	}

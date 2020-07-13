@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"strconv"
+	"strings"
 
 	"github.com/dvg-dev/food-aggregator/helpers"
 	"github.com/dvg-dev/food-aggregator/model"
@@ -37,7 +38,7 @@ func (g *GetHandler) BuyByNameQty(ctx echo.Context) error {
 //findItembyQty to find the item from the list based on name and quantity
 func findItembyQty(items []model.Item, name string, quantity int) model.Item {
 	for _, item := range items {
-		if name == item.Name && quantity <= item.Quantity {
+		if strings.EqualFold(name, item.Name) && quantity <= item.Quantity {
 			return item
 		}
 	}

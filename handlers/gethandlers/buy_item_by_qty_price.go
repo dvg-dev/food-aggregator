@@ -3,6 +3,7 @@ package gethandlers
 import (
 	"encoding/json"
 	"strconv"
+	"strings"
 
 	"github.com/dvg-dev/food-aggregator/helpers"
 	"github.com/dvg-dev/food-aggregator/model"
@@ -43,7 +44,7 @@ func (g *GetHandler) BuyByNameQtyPrice(ctx echo.Context) error {
 func findItembyQtyPrice(items []model.Item, itemName string, quantity int, itemPrice float64) model.Item {
 	for _, item := range items {
 		price, _ := strconv.ParseFloat(item.Price[1:], 64)
-		if itemName == item.Name && quantity <= item.Quantity && ((itemPrice / float64(quantity)) <= (price / float64(item.Quantity))) {
+		if strings.EqualFold(itemName, item.Name) && quantity <= item.Quantity && ((itemPrice / float64(quantity)) <= (price / float64(item.Quantity))) {
 			return item
 		}
 	}
